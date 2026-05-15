@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tech News — Edukasi, Riset & Tren Digital</title>
+  <meta name="description" content="Platform artikel teknologi, AI, keamanan siber, dan tren digital Indonesia." />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    header {
+      padding: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      position: sticky;
+      top: 0;
+      background: rgba(15,23,42,0.95);
+      backdrop-filter: blur(10px);
+      z-index: 99;
+    }
+
+    .nav {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .menu {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .menu a {
+      color: #cbd5e1;
+      transition: .3s;
+    }
+
+    .menu a:hover {
+      color: white;
+    }
+
+    .hero {
+      max-width: 1200px;
+      margin: auto;
+      padding: 70px 20px 40px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 52px;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      max-width: 850px;
+      margin: auto;
+      color: #cbd5e1;
+      font-size: 18px;
+    }
+
+    .articles {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: #111827;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: .3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255,255,255,0.2);
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 20px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #1d4ed8;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      margin-bottom: 14px;
+    }
+
+    .card h2 {
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      color: #cbd5e1;
+      margin-bottom: 20px;
+    }
+
+    .read-btn {
+      display: inline-block;
+      padding: 10px 18px;
+      background: white;
+      color: black;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+
+    .article-page {
+      max-width: 900px;
+      margin: auto;
+      padding: 40px 20px 80px;
+      display: none;
+    }
+
+    .article-page img {
+      width: 100%;
+      border-radius: 18px;
+      margin: 25px 0;
+    }
+
+    .article-page h1 {
+      font-size: 44px;
+      margin-bottom: 20px;
+    }
+
+    .article-page p {
+      margin-bottom: 18px;
+      color: #e2e8f0;
+      font-size: 18px;
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 30px;
+      color: #93c5fd;
+    }
+
+    footer {
+      margin-top: 70px;
+      padding: 40px 20px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: #94a3b8;
+    }
+
+    @media(max-width:768px){
+      .hero h1 {
+        font-size: 38px;
+      }
+
+      .article-page h1 {
+        font-size: 32px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo">Tech News</div>
+
+    <div class="menu">
+      <a href="/tech-news/">Home</a>
+      <a href="/tech-news/#riset">Riset</a>
+      <a href="/tech-news/#ai">AI & ML</a>
+      <a href="/tech-news/#security">Keamanan</a>
+    </div>
+  </div>
+</header>
+
+<section id="homepage">
+  <div class="hero">
+    <h1>Platform Teknologi & Digital</h1>
+    <p>
+      Edukasi teknologi, AI, keamanan siber, open source, cloud computing,
+      dan tren digital terbaru Indonesia.
+    </p>
+  </div>
+
+  <div class="articles" id="article-list"></div>
+</section>
+
+<section class="article-page" id="article-page"></section>
+
+<footer>
+  © 2026 Tech News — waldo989/tech-news
+</footer>
+
+<script>
+  const articles = [
+    {
+      slug: 'bagaimana-ai-generatif-mengubah-ekosistem-teknologi-indonesia',
+      category: 'AI & ML',
+      title: 'Bagaimana AI Generatif Mengubah Ekosistem Teknologi Indonesia',
+      image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1400&auto=format&fit=crop',
+      excerpt: 'Analisis mendalam tentang adopsi kecerdasan buatan di Indonesia.',
+      content: `
+        <p>
+          AI generatif menjadi salah satu teknologi paling berkembang selama 2025.
+          Banyak startup dan perusahaan mulai mengintegrasikan AI ke produk mereka.
+        </p>
+
+        <p>
+          Penggunaan Large Language Model meningkat pada sektor pendidikan,
+          customer service, dan otomatisasi bisnis.
+        </p>
+
+        <p>
+          Indonesia termasuk pasar digital terbesar di Asia Tenggara sehingga
+          pertumbuhan AI diprediksi terus meningkat.
+        </p>
+      `
+    },
+
+    {
+      slug: 'ancaman-zero-day-2025-tren-serangan-terbaru',
+      category: 'Keamanan Siber',
+      title: 'Ancaman Zero-Day 2025: Tren Serangan Terbaru',
+      image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1400&auto=format&fit=crop',
+      excerpt: 'Tinjauan serangan siber terbaru dan mitigasinya.',
+      content: `
+        <p>
+          Serangan zero-day meningkat drastis selama 2025 dengan target utama
+          perusahaan cloud dan layanan digital.
+        </p>
+
+        <p>
+          Organisasi perlu menerapkan patch management dan monitoring real-time
+          untuk mengurangi risiko eksploitasi.
+        </p>
+      `
+    },
+
+    {
+      slug: 'open-source-ai-peluang-dan-tantangan-pengembang-indonesia',
+      category: 'Open Source',
+      title: 'Open Source AI: Peluang dan Tantangan Developer Indonesia',
+      image: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1400&auto=format&fit=crop',
+      excerpt: 'Ekosistem AI open-source semakin berkembang.',
+      content: `
+        <p>
+          Model open-source seperti Llama dan Mistral membuka peluang besar
+          bagi developer Indonesia.
+        </p>
+
+        <p>
+          Dengan akses model terbuka, startup lokal dapat mengembangkan solusi
+          AI dengan biaya lebih rendah.
+        </p>
+      `
+    }
+  ];
+
+  const listContainer = document.getElementById('article-list');
+  const homepage = document.getElementById('homepage');
+  const articlePage = document.getElementById('article-page');
+
+  function renderHome() {
+    homepage.style.display = 'block';
+    articlePage.style.display = 'none';
+
+    listContainer.innerHTML = '';
+
+    articles.forEach(article => {
+      listContainer.innerHTML += `
+        <div class="card">
+          <img src="${article.image}" alt="${article.title}">
+
+          <div class="card-content">
+            <div class="tag">${article.category}</div>
+
+            <h2>${article.title}</h2>
+
+            <p>${article.excerpt}</p>
+
+            <a class="read-btn" href="/tech-news/${article.slug}">
+              Baca Artikel
+            </a>
+          </div>
+        </div>
+      `;
+    });
+  }
+
+  function renderArticle(slug) {
+    const article = articles.find(a => a.slug === slug);
+
+    if (!article) {
+      articlePage.style.display = 'block';
+      homepage.style.display = 'none';
+
+      articlePage.innerHTML = `
+        <a class="back" href="/tech-news/">← Kembali</a>
+        <h1>404</h1>
+        <p>Artikel tidak ditemukan.</p>
+      `;
+
+      return;
+    }
+
+    homepage.style.display = 'none';
+    articlePage.style.display = 'block';
+
+    articlePage.innerHTML = `
+      <a class="back" href="/tech-news/">← Kembali ke Home</a>
+
+      <div class="tag">${article.category}</div>
+
+      <h1>${article.title}</h1>
+
+      <img src="${article.image}" alt="${article.title}">
+
+      ${article.content}
+    `;
+  }
+
+  function router() {
+    const path = window.location.pathname.replace('/tech-news', '');
+
+    if (path === '/' || path === '') {
+      renderHome();
+      return;
+    }
+
+    const slug = path.replace('/', '');
+    renderArticle(slug);
+  }
+
+  document.addEventListener('click', function(e){
+    const link = e.target.closest('a');
+
+    if (!link) return;
+
+    const href = link.getAttribute('href');
+
+    if (href.startsWith('/tech-news/')) {
+      e.preventDefault();
+
+      history.pushState({}, '', href);
+      router();
+    }
+  });
+
+  window.addEventListener('popstate', router);
+
+  router();
+</script>
+
+</body>
+</html>
